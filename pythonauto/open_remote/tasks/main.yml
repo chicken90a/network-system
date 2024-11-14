@@ -1,0 +1,18 @@
+---
+#task for agent default
+- name: open remote
+  routeros_command:
+    commands:
+      - /ip firewall address-list add address="{{ ip_dest }}" list=RDP_LST
+      - /ip firewall nat add action=dst-nat chain=dstnat dst-address="{{ ip_source }}" dst-port="{{ port }}" log=no protocol=tcp to-addresses="{{ ip_dest }}" to-ports="{{ port }}"
+
+- name: Run command with expect
+  expect:
+    command: ssh -o StrictHostKeyChecking=no admin@192.168.4.221 "/ip firewall nat print"
+    responses:
+      '.*password:': "{{ password }}"
+  register: result
+ 
+- name: Print result
+  debug:
+    msg: "{{ result.stdout_lines }}"

@@ -1,0 +1,116 @@
+# 2024-11-01 03:28:43 by RouterOS 7.13.2
+# software id =
+#
+/disk
+set slot1 slot=slot1 type=hardware
+set slot2 slot=slot2 type=hardware
+set slot3 slot=slot3 type=hardware
+/interface ethernet
+set [ find default-name=ether1 ] disable-running-check=no
+/interface vrrp
+# No IPv4 address!
+add interface=ether1 name=VRRP_INTERFACE priority=200 vrid=199
+/interface vlan
+add interface=ether1 name=VLAN21 vlan-id=211
+/ip pool
+add name=my_pool ranges=192.168.1.100-192.168.1.200
+add name=hihi ranges=192.168.2.100-192.168.2.200
+add name=hihi ranges=192.168.2.100-192.168.2.200
+/ip address
+add address=192.168.88.55/24 interface=ether1 network=192.168.88.0
+
+/ip dhcp-client
+add interface=ether1
+/ip firewall address-list
+add address=192.0.34.166 list=drop_traffic
+add address=192.0.34.177 list=drop_traffic
+add address=172.31.22.22 list=RDP_LST
+add address=172.31.22.17 list=RDP_LST
+add address=172.31.22.18 list=RDP_LST
+add address=172.31.22.33 list=RDP_LST
+add address=172.31.22.35 list=RDP_LST
+add address=172.31.22.76 list=RDP_LST
+add address=172.31.22.77 list=RDP_LST
+add address=172.31.22.15 list=RDP_LST
+add address=172.31.22.16 list=RDP_LSTs
+add address=172.31.22.13 list=RDP_LST
+add address=172.31.22.20 list=RDP_LST
+add address=172.31.22.20 list=RDP_LSTs
+add address=172.31.22.111 list=RDP_LSTs
+add address=172.31.22.10 list=RDP_LSTs
+add address=172.31.22.11 list=RDP_LSTs
+add address=172.31.22.11 list=RDP_LST
+add address=172.31.22.21 list=RDP_LST
+/ip firewall filter
+add action=drop chain=forward comment="Drop Telegram" dst-address= 149.154.167.99 src-address-list=""
+add action=accept chain=forward dst-port=53,67,68,22,23,515,88,9993 protocol= udp
+add action=drop chain=forward dst-address=172.16.18.0/24 src-address-list= Users_Network
+/ip firewall mangle
+add action=accept chain=prerouting dst-address=192.168.4.0/24  src-address-list=Auto_QA_BD
+add action=accept chain=prerouting dst-address=192.168.4.0/24  src-address-list=Auto_QA_BD
+add action=accept chain=prerouting comment="bao.tran hahahaha ghihihihihhi"  dst-address-list=Auto_QA_LS src-address=192.168.5.1
+add action=accept chain=prerouting comment="bao.tran hahahaha ghihihihihhi"  dst-address-list=Auto_QA_LS src-address=192.168.5.1
+add action=accept chain=prerouting comment="bao.tran ghihihihihhi"  dst-address-list=Auto_QA_LS src-address=192.168.5.0/24
+add action=accept chain=prerouting comment="bao.tran ghihihihihhi"  dst-address-list=Auto_QA_LS src-address=192.168.5.0/24
+add action=accept chain=prerouting comment="bao.tran ghihihihihhi"  dst-address-list=Auto_QA_LS src-address=192.168.5.0/24
+add action=accept chain=prerouting comment="bao.tran hahahaha ghihihihihhi"  dst-address-list=Auto_QA_LS src-address=192.168.5.0/24
+add action=accept chain=prerouting comment="bao.tran hahahaha ghihihihihhi"  dst-address-list=Auto_QA_LSaa src-address=192.168.7.0/24
+add action=accept chain=prerouting comment="bao.tran ghihihihihhi"  dst-address-list=Auto_QA_LS src-address=192.168.5.0/24
+add action=accept chain=prerouting comment="bao.tran ghihihihihhi"  dst-address-list=Auto_QA_LS src-address=192.168.5.0/24
+add action=accept chain=prerouting comment="bao.nguyen hahahaha ghihihihihhi"  dst-address-list=Auto_QA_LSaacccc src-address=192.168.7.0/24
+add action=accept chain=prerouting dst-address=192.168.5.0/24  src-address-list=Auto_QA_LS
+add action=accept chain=prerouting dst-address=192.168.5.0/24  src-address-list=Auto_QA_LS
+add action=accept chain=prerouting dst-address=192.168.8.0/24  src-address-list=Auto_QA_LSabc
+add action=accept chain=prerouting dst-address=192.168.5.0/24  src-address-list=Auto_QA_LS
+add action=accept chain=prerouting dst-address=192.168.5.0/24  src-address-list=Auto_QA_LS
+add action=accept chain=prerouting dst-address=192.168.8.0/24  src-address-list=Auto_QA_LSbbccc
+add action=accept chain=prerouting dst-address=192.168.8.0/24  src-address-list=Auto_QA_LSbbccc
+add action=accept chain=prerouting dst-address=192.168.10.0/24  src-address-list=Auto_QA_LSbb
+add action=accept chain=prerouting dst-address=192.168.8.0/24  src-address-list=Auto_QA_LSbbccc
+add action=accept chain=prerouting dst-address=192.168.10.0/24  src-address-list=Auto_QA_LSbb
+add action=accept chain=prerouting dst-address=192.168.8.0/24  src-address-list=Auto_QA_LSbbccc
+add action=accept chain=prerouting dst-address=192.168.10.0/24  src-address-list=Auto_QA_LSbb
+/ip firewall nat
+add action=dst-nat chain=dstnat dst-address=118.107.96.20 dst-port=12345  protocol=tcp to-addresses=172.31.22.177 to-ports=12345
+add action=dst-nat chain=dstnat dst-address=118.107.96.20 dst-port=12345  protocol=tcp to-addresses=172.31.22.177 to-ports=12345
+add action=dst-nat chain=dstnat dst-address=118.107.96.22 dst-port=12123  protocol=tcp to-addresses=172.31.22.109 to-ports=12123
+add action=dst-nat chain=dstnat dst-address=118.107.96.22 dst-port=55555  protocol=tcp to-addresses=172.31.22.12 to-ports=55555
+add action=dst-nat chain=dstnat dst-address=118.107.96.22 dst-port=55556  protocol=tcp to-addresses=172.31.22.13 to-ports=55556
+add action=dst-nat chain=dstnat dst-address=118.107.96.22 dst-port=55557  protocol=tcp to-addresses=172.31.22.14 to-ports=55557
+add action=dst-nat chain=dstnat dst-address=118.107.96.55 dst-port=55558  protocol=tcp to-addresses=172.31.22.16 to-ports=55558
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55559  protocol=tcp to-addresses=172.31.22.17 to-ports=55559
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55123  protocol=tcp to-addresses=172.31.22.33 to-ports=55123
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55125  protocol=tcp to-addresses=172.31.22.35 to-ports=55125
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55126  protocol=tcp to-addresses=172.31.22.35 to-ports=55126
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55127  protocol=tcp to-addresses=172.31.22.35 to-ports=55127
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55126  protocol=tcp to-addresses=172.31.22.35 to-ports=55126
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55125  protocol=tcp to-addresses=172.31.22.35 to-ports=55125
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55126  protocol=tcp to-addresses=172.31.22.35 to-ports=55126
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55125  protocol=tcp to-addresses=172.31.22.35 to-ports=55125
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55126  protocol=tcp to-addresses=172.31.22.35 to-ports=55126
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55126  protocol=tcp to-addresses=172.31.22.35 to-ports=55126
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55126  protocol=tcp to-addresses=172.31.22.35 to-ports=55126
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55126  protocol=tcp to-addresses=172.31.22.35 to-ports=55126
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55126  protocol=tcp to-addresses=172.31.22.35 to-ports=55126
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55126  protocol=tcp to-addresses=172.31.22.35 to-ports=55126
+add action=dst-nat chain=dstnat dst-address=118.107.96.56 dst-port=55513  protocol=tcp to-addresses=172.31.22.77 to-ports=55513
+add action=dst-nat chain=dstnat dst-address=118.107.96.90 dst-port=33333  protocol=tcp to-addresses=172.31.22.111 to-ports=33333
+add action=dst-nat chain=dstnat dst-address=118.107.96.90 dst-port=44444  protocol=tcp to-addresses=172.31.22.12 to-ports=44444
+add action=dst-nat chain=dstnat dst-address=118.107.96.90 dst-port=33333  protocol=tcp to-addresses=172.31.22.111 to-ports=33333
+add action=dst-nat chain=dstnat dst-address=118.107.96.90 dst-port=44444  protocol=tcp to-addresses=172.31.22.12 to-ports=44444
+add action=dst-nat chain=dstnat dst-address=118.107.96.20 dst-port=11111  protocol=tcp to-addresses=172.31.22.11 to-ports=11111
+add action=dst-nat chain=dstnat dst-address=118.107.96.20 dst-port=33539  protocol=tcp to-addresses=172.31.22.177 to-ports=33539
+add action=dst-nat chain=dstnat dst-address=118.107.96.20 dst-port=33539  protocol=tcp to-addresses=172.31.22.177 to-ports=33539
+add action=dst-nat chain=dstnat dst-address=118.107.96.20 dst-port=33539  protocol=tcp to-addresses=172.31.22.178 to-ports=33539
+add action=dst-nat chain=dstnat dst-address=118.107.96.20 dst-port=33539  protocol=tcp to-addresses=172.31.22.177 to-ports=33539
+add action=dst-nat chain=dstnat dst-address=118.107.96.20 dst-port=33539  protocol=tcp to-addresses=172.31.22.11 to-ports=33540
+add action=dst-nat chain=dstnat dst-address=118.107.96.20 dst-port=33539  protocol=tcp to-addresses=172.31.22.12 to-ports=33539
+add action=dst-nat chain=dstnat dst-address=118.107.96.20 dst-port=12346  protocol=tcp to-addresses=172.31.22.176 to-ports=12346
+/ip route
+add check-gateway=arp comment="Allow line Pepwave go to Internet" disabled=no      distance=2 dst-address=0.0.0.0/0 gateway=172.31.1.200 pref-src=""  routing-table=main scope=30 suppress-hw-offload=no target-scope=10
+add distance=1 dst-address=192.168.1.0/24 gateway=172.31.1.200 routing-table= main scope=30
+add disabled=no distance=1 dst-address=172.16.12.0/24 gateway=172.31.1.200      pref-src="" routing-table=main scope=30 suppress-hw-offload=no  target-scope=10
+/ip service
+set winbox port=1433
+/system note
+set show-at-login=no

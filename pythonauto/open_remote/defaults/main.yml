@@ -1,0 +1,16 @@
+open_remote:
+- comment: testing ne ne ne
+  dst_address: 192.168.0.0/24
+  dst_address_list: Auto_QA_BDD
+  src_address: 192.168.0.0/24
+  src_address_list: Auto_QA_BDD
+- comment: testing thoi
+  dst_address: 192.168.0.0/24
+  dst_address_list: Auto_QA_BDD
+  src_address: 192.168.0.0/24
+  src_address_list: Auto_QA_BDD
+- comment: testing thoi ma ma ma ma
+  dst_address: 192.168.110.0/24
+  dst_address_list: Auto_QA_BDLSD
+  src_address: 192.168.110.0/24
+  src_address_list: Auto_QA_BDDLSS
